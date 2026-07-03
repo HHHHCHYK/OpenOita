@@ -1,0 +1,9 @@
+{
+    "type": "TestMaterial",
+    "id": 2,
+    "name": "sand",
+    "color": "#C2B280",
+    "gravityMultiplier": 1,
+    "mass": 3,
+    "strength": 20
+}

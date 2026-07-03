@@ -1,0 +1,9 @@
+{
+    "type": "TestMaterial",
+    "id": 1,
+    "name": "stone",
+    "color": "#FFFFFF",
+    "gravityMultiplier": 0,
+    "mass": 10,
+    "strength": 100
+}

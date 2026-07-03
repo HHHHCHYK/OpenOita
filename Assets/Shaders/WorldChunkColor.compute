@@ -1,0 +1,32 @@
+#pragma kernel CSMain
+
+StructuredBuffer<uint> _MaterialIds;
+Texture2DArray<float4> _MaterialArray;
+RWTexture2D<float4> _Output;
+uint _ChunkSize;
+uint _MaterialSliceCount;
+
+[numthreads(8, 8, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x >= _ChunkSize || id.y >= _ChunkSize)
+        return;
+
+    uint index = id.y * _ChunkSize + id.x;
+    uint matId = _MaterialIds[index];
+
+    if (matId == 0)
+    {
+        _Output[id.xy] = float4(0, 0, 0, 0);
+        return;
+    }
+
+    if (matId >= _MaterialSliceCount)
+    {
+        _Output[id.xy] = float4(1, 0, 1, 1);
+        return;
+    }
+
+    float4 color = _MaterialArray.Load(int4(0, 0, matId, 0));
+    _Output[id.xy] = color;
+}
